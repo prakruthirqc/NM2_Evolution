@@ -4,130 +4,224 @@
 
 ## 1. Sequence Retrieval
 
-Protein sequences of non-muscle myosin II homologs were retrieved from the UNIPROT database in FASTA format.
+Protein sequences of non-muscle myosin II homologs were retrieved manually from the UniProt database in FASTA format.
 
-Species included, their genes and UNIPROTIDs:
+### Species and Accession Numbers
 
-1. Homo sapiens - MYH9(P35579), MYH10(P35580), MYH14(Q7Z406)
+- Homo sapiens
+  - MYH9 — P35579
+  - MYH10 — P35580
+  - MYH14 — Q7Z406
 
-2. Mus musculus - MYH9(Q8VDD5), MYH10(Q61879), MYH14(Q6URW6)
+- Mus musculus
+  - MYH9 — Q8VDD5
+  - MYH10 — Q61879
+  - MYH14 — Q6URW6
 
-3. Danio rerio - myh9a(A0A8M2BCY6), myh10(I3ISA3)
+- Danio rerio
+  - myh9a — A0A8M1NEM1
+  - myh10 — I3ISA3
 
-4. Gallus gallus - MYH9(P14105), MYH10(Q789A4)
+- Gallus gallus
+  - MYH9 — P14105
+  - MYH10 — Q789A4
 
-5. Drosophila melanogaster - zip(Q99323)
+- Drosophila melanogaster
+  - zip — Q99323
 
-6. Caenorhabditis elegans - nmy-2(Q22869)
+- Caenorhabditis elegans
+  - nmy-2 — Q22869
 
-7. Dictyostelium discoideum - mhcA(P08799)
+- Dictyostelium discoideum
+  - mhcA — P08799
+
+### Notes
+
+- Only conserved motor/head domains were retained
+- Variable tail regions were excluded
+- Human MYO6 was tested initially as an outgroup but removed from final analysis due to excessive divergence
 
 ---
 
 ## 2. Multiple Sequence Alignment
 
-**Tool used:** MAFFT
+### Tool Used
 
-**Command used:**
+**MAFFT v7.505**
+
+### Command
 
 ```bash
-mafft --auto raw_data/all_nmii.fasta > alignment/aligned_nmii.fasta
+mafft --auto all_nmii_motor.fasta > aligned_nmii.fasta
 ```
 
-### Parameters
+### Default/Internal Parameters
 
-- Alignment strategy automatically selected using `--auto`
-- Sequence type detected: Amino acid (protein)
-- Substitution matrix used: BLOSUM62
-- Progressive alignment with iterative refinement performed
-- UPGMA guide tree constructed internally
-- Gap opening penalty automatically optimized by MAFFT
-- Iterative refinement cycles: 16
-- Thread usage: Single-thread execution
+- Sequence type automatically detected as protein
+- Substitution matrix: BLOSUM62
+- Progressive alignment enabled
+- Iterative refinement enabled
+- UPGMA guide tree generated internally
+- Gap opening penalty automatically optimized
+- Local pairwise alignment information used
+- Final strategy selected automatically: L-INS-i
+- Iterative refinement cycles: <16
+- Single-thread execution
 
 ### Results
 
 - Total sequences aligned: 13
-- Alignment completed successfully
-- Convergence achieved during iterative refinement
+- Alignment converged successfully
 
-**Output:** `aligned_nmii.fasta`
+### Output
+
+```bash
+aligned_nmii.fasta
+```
 
 ---
 
 ## 3. Alignment Trimming
 
-**Tool used:** ClipKIT
+### Tool Used
 
-**Command used:**
+**ClipKIT**
+
+### Command
 
 ```bash
-~/.local/bin/clipkit alignment/aligned_nmii.fasta -o alignment/trimmed_nmii.fasta
+clipkit aligned_nmii.fasta -m smart-gap -o trimmed_nmii.fasta
 ```
 
 ### Parameters
 
-- Sequence type detected: Protein
 - Trimming mode: smart-gap
+- Sequence type: Protein
 - Gap threshold: 0.9231
 - Codon processing: Disabled
-- Trim terminal ends only: False
-- Log file generation: Disabled
+- Terminal-only trimming: Disabled
+- Complementary output: Disabled
+- Log generation: Disabled
 
 ### Results
 
-- Original length: 2321
-- Number of sites kept: 2031
-- Number of sites trimmed: 290
-- Percentage of alignment trimmed: 12.495%
+- Original length: 772
+- Sites retained: 717
+- Sites removed: 55
+- Alignment trimmed: 7.124%
 
-**Output:** `trimmed_nmii.fasta`
+### Output
+
+```bash
+trimmed_nmii.fasta
+```
 
 ---
 
 ## 4. Phylogenetic Tree Construction
 
-**Tool used:** IQ-TREE2
+### Tool Used
 
-**Command used:**
+**IQ-TREE2 v2.3.6**
+
+### Command
 
 ```bash
-iqtree2 -s alignment/trimmed_nmii.fasta -m MFP -B 1000 --alrt 1000 -T AUTO --prefix trees/nmii_tree --redo
+iqtree2 -s trimmed_nmii.fasta -m MFP -bb 1000 -alrt 1000
 ```
 
 ### Parameters
 
-- Sequence type automatically detected: Protein
+- `-m MFP`
+  - Automatic model selection using ModelFinder Plus
+
+- `-bb 1000`
+  - Ultrafast bootstrap with 1000 replicates
+
+- `-alrt 1000`
+  - SH-aLRT branch support with 1000 replicates
+
+### Default/Internal Parameters
+
+- Protein sequence detection automatic
+- Maximum likelihood tree search enabled
+- NNI optimization enabled
+- Branch length optimization enabled
+- Automatic seed generation enabled
+
+### Alignment Statistics
+
 - Number of sequences: 13
-- Alignment length: 2031 amino acid positions
-- CPU threads automatically detected using `-T AUTO`
-- MFP: ModelFinder Plus used for automatic model selection
-- Ultrafast bootstrap replicates: 1000
-- SH-aLRT replicates: 1000
+- Alignment length: 717 amino acids
+- Distinct patterns: 438
+- Parsimony informative sites: 211
+- Singleton sites: 238
+- Constant sites: 268
 
-### Best-fit model selected
+### Tree Search Results
 
-`Q.insect+F+R3`
+- Total iterations: 102
+- Initial log-likelihood: -6498.237
+- Optimized log-likelihood: -6497.906
+- Gamma shape alpha: 1.030
+- Proportion of invariant sites: 0.161
 
-### Results
+### Notes
 
-- Total tree search iterations: 102
-- Final optimized log-likelihood: -25085.630
-- Bootstrap consensus tree generated successfully
+- Mouse MYH10 and human MYH10 motor domains were nearly identical after trimming due to highly conserved nature of motor domain
+- No sequences failed the composition chi-square test
 
-### Major files generated
+### Output Files
 
-- `nmii_tree.treefile`
-- `nmii_tree.contree`
-- `nmii_tree.iqtree`
-- `nmii_tree.log`
+```bash
+trimmed_nmii.fasta.treefile
+trimmed_nmii.fasta.contree
+trimmed_nmii.fasta.iqtree
+trimmed_nmii.fasta.log
+trimmed_nmii.fasta.splits.nex
+trimmed_nmii.fasta.mldist
+```
 
 ---
 
 ## 5. Tree Visualization
 
-**Tool used:** iTOL (Interactive Tree Of Life)
+### Tool Used
 
-### Output
+**iTOL (Interactive Tree Of Life)**
 
-`nmii_phylogenetic_tree.svg`
+### Visualization Settings
+
+- Rectangular layout
+- Bootstrap values displayed
+- SH-aLRT values displayed separately
+- Minimal black-and-white formatting
+
+### Exported Files
+
+```bash
+Bootstrap.svg
+SH-aLRT.png
+```
+
+---
+
+## 6. Biological Interpretation
+
+- Vertebrate MYH9 orthologs clustered together, indicating strong evolutionary conservation across species.
+
+- MYH10 orthologs formed a distinct conserved clade separate from MYH9 proteins.
+
+- MYH14 proteins grouped independently, supporting functional divergence within the NM2 family.
+
+- Zebrafish and chicken homologs clustered close to mammalian homologs, consistent with vertebrate evolutionary relationships.
+
+- Drosophila ZIP and C. elegans NMY-2 branched outside vertebrate NM2 clades, reflecting greater evolutionary divergence in invertebrates.
+
+- Dictyostelium discoideum mhcA formed the most basal branch and served as an effective outgroup for rooting the tree.
+
+- High bootstrap and SH-aLRT support values were observed for major vertebrate clades, indicating strong statistical confidence in the inferred phylogenetic relationships.
+
+- Mouse MYH10 and human MYH10 motor domains showed extremely high sequence conservation after trimming, resulting in very short branch distances between them.
+
+---
