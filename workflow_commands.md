@@ -226,4 +226,4 @@ SH-aLRT.png
 
 ---
 
-- All commands, parameters, intermediate files, and output trees were documented in `workflow_commands.md` to ensure reproducibility of the complete analysis pipeline.
+ All commands, parameters, intermediate files, and output trees were documented in `workflow_commands.md` to ensure reproducibility of the complete analysis pipeline.
