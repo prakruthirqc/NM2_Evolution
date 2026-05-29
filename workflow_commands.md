@@ -225,3 +225,5 @@ SH-aLRT.png
 - Mouse MYH10 and human MYH10 motor domains showed extremely high sequence conservation after trimming, resulting in very short branch distances between them.
 
 ---
+
+- All commands, parameters, intermediate files, and output trees were documented in `workflow_commands.md` to ensure reproducibility of the complete analysis pipeline.
