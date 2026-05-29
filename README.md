@@ -111,6 +111,7 @@ Variable coiled-coil tail regions were excluded because:
 - Tail length varies substantially across species
 - Highly divergent regions can introduce alignment artifacts
 - Conserved motor domains provide stronger phylogenetic signal
+- All sequences were retrieved from manually annotated UniProt entries corresponding to non-muscle myosin II homologs.
 
 Human MYO6 was initially tested as an outgroup candidate. However, it was excluded from the final dataset because MYO6 belongs to a fundamentally different myosin class with excessive sequence divergence that distorted phylogenetic reconstruction.
 
