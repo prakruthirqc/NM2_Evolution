@@ -1,277 +1,284 @@
-# NM2 Evolution
+# NM2 Evolution Analysis
 
-Phylogenetic analysis of non-muscle myosin II evolution and duplication events across diverse eukaryotic organisms.
-
----
-
-# Objective
-
-The aim of this project was to study the evolutionary relationships of non-muscle myosin II (NMII) proteins across different eukaryotic species using phylogenetic analysis. The workflow included sequence retrieval, dataset curation, multiple sequence alignment, alignment trimming, phylogenetic tree construction, and biological interpretation of the resulting evolutionary patterns.
+## Evolutionary Conservation and Diversification of Non-Muscle Myosin II Motor Domains Across Eukaryotes
 
 ---
 
-# Why Non-Muscle Myosin II?
+## Overview
 
-Non-muscle myosin II (NMII) is an actin-based motor protein involved in several essential cellular processes including:
+Non-muscle myosin II (NM2) proteins are highly conserved actin-based molecular motors involved in essential cellular processes including cytokinesis, cell migration, adhesion, intracellular transport, tissue morphogenesis, and maintenance of cell polarity. In vertebrates, the NM2 family has diversified into multiple paralogs — primarily MYH9, MYH10, and MYH14 — each contributing specialized functional roles in different tissues and developmental contexts.
+
+This project investigates the evolutionary relationships among NM2 homologs across diverse eukaryotic organisms through multiple sequence alignment and phylogenetic reconstruction using conserved motor domains.
+
+The analysis particularly focuses on how increasing organismal complexity correlates with expansion of paralogous NM2 genes through gene duplication events, allowing functional specialization and fine-tuned cellular regulation.
+
+---
+
+# Biological Motivation
+
+Gene duplication is one of the major driving forces of molecular evolution. As organisms become more complex, duplicated genes can diverge over evolutionary time and acquire specialized or partially redundant functions.
+
+The non-muscle myosin II family provides an excellent model for studying this phenomenon:
+
+- Simpler eukaryotes generally possess a single NM2-like homolog
+- Invertebrates contain limited diversification
+- Vertebrates possess multiple paralogs including MYH9, MYH10, and MYH14
+
+These paralogs likely originated through ancestral gene duplication events followed by functional divergence.
+
+The conservation of the ATPase motor domain across species reflects strong evolutionary pressure to preserve core motor activity, while diversification of paralogs supports increasingly specialized cellular functions in higher organisms.
+
+---
+
+# Why Non-Muscle Myosin II Was Selected Instead of Muscle Myosin
+
+The broader myosin superfamily contains multiple classes of motor proteins with highly diverse cellular functions. Although the assigned protein family for this project was broadly “myosin,” the analysis specifically focused on non-muscle myosin II (NM2) proteins rather than conventional muscle myosins.
+
+This choice was made because NM2 proteins provide a better model for studying evolutionary conservation, paralog diversification, and functional specialization across eukaryotes.
+
+Unlike muscle myosins, which are highly specialized for skeletal and cardiac muscle contraction, NM2 proteins are universally involved in fundamental cellular processes including:
 
 - Cytokinesis
 - Cell migration
-- Cell polarity
-- Adhesion
-- Intracellular tension generation
-- Morphogenesis
+- Cell adhesion
+- Maintenance of cell polarity
+- Tissue morphogenesis
+- Intracellular force generation
 
-Unlike muscle myosins, NMII proteins are present in a wide range of eukaryotic organisms and are evolutionarily conserved. Studying NMII evolution helps in understanding:
+These functions are conserved across a broad evolutionary range from unicellular eukaryotes to vertebrates, making NM2 proteins particularly suitable for comparative phylogenetic analysis.
 
-- Conservation of cytoskeletal mechanisms across species
-- Functional divergence after gene duplication
-- Emergence of paralog-specific specialization
-- Evolution of multicellularity and cellular complexity
+In addition, vertebrate NM2 proteins have diversified into multiple paralogs (MYH9, MYH10, and MYH14) through ancestral gene duplication events. This paralog expansion provides an opportunity to study how increasing organismal complexity drives functional diversification while maintaining strong conservation of essential motor domains.
 
-The myosin family was selected because it represents an ideal model to study both evolutionary conservation and diversification of cytoskeletal proteins.
+Muscle myosins were not selected because they are highly tissue-specific and evolutionarily specialized for contractile systems, whereas NM2 proteins better reflect core cellular evolutionary mechanisms shared across eukaryotic life.
+
+Therefore, non-muscle myosin II proteins were chosen as an ideal system to investigate evolutionary conservation, paralog emergence, and functional divergence within the larger myosin superfamily.
 
 ---
 
-# Species Selection Rationale
+# Why These Organisms Were Selected
 
-Species were selected to represent a broad evolutionary distribution across eukaryotes, allowing comparison between vertebrates, invertebrates, and lower eukaryotes.
+The organisms used in this analysis were intentionally chosen to represent major evolutionary transitions across eukaryotic life.
 
-| Species | Reason for Inclusion |
-|---|---|
-| *Homo sapiens* | Representative mammalian vertebrate with multiple NMII paralogs |
-| *Mus musculus* | Closely related mammalian model organism used for evolutionary comparison |
-| *Danio rerio* | Representative vertebrate fish lineage |
-| *Gallus gallus* | Representative avian lineage |
-| *Drosophila melanogaster* | Well-studied invertebrate model organism |
-| *Caenorhabditis elegans* | Evolutionarily distant nematode model |
-| *Dictyostelium discoideum* | Social amoeba representing early-diverging eukaryotes |
+## Vertebrates
 
-This species selection enabled analysis of:
-- Conservation of NMII proteins across vertebrates
-- Divergence between vertebrate and invertebrate homologs
-- Evolutionary distance between higher and lower eukaryotes
-- Potential duplication events in vertebrate NMII genes
+### Homo sapiens (Human)
+
+Human MYH9, MYH10, and MYH14 proteins were included as representative vertebrate NM2 paralogs with highly specialized cellular functions.
+
+### Mus musculus (Mouse)
+
+Mouse homologs were selected because of their close evolutionary relationship to humans and extensive use as mammalian model organisms.
+
+### Danio rerio (Zebrafish)
+
+Zebrafish proteins were included to represent early vertebrate evolution and aquatic vertebrates.
+
+### Gallus gallus (Chicken)
+
+Chicken homologs provided an additional non-mammalian vertebrate lineage for comparison.
+
+---
+
+## Invertebrates
+
+### Drosophila melanogaster
+
+The Drosophila ZIP homolog represents a more ancestral invertebrate NM2-like protein.
+
+### Caenorhabditis elegans
+
+NMY-2 from *C. elegans* was included as a nematode representative with reduced paralog complexity.
+
+---
+
+## Basal Eukaryote / Outgroup
+
+### Dictyostelium discoideum
+
+The mhcA homolog from *Dictyostelium* was selected as a distant eukaryotic outgroup because it contains a primitive myosin II homolog while remaining evolutionarily distant from metazoans.
+
+Its inclusion helps root the phylogenetic tree and provides evolutionary context for divergence among animal NM2 paralogs.
+
+---
+
+# Sequence Selection Strategy
+
+Only conserved motor/head domains were retained for analysis.
+
+Variable coiled-coil tail regions were excluded because:
+
+- Tail regions evolve more rapidly
+- Tail length varies substantially across species
+- Highly divergent regions can introduce alignment artifacts
+- Conserved motor domains provide stronger phylogenetic signal
+
+Human MYO6 was initially tested as an outgroup candidate. However, it was excluded from the final dataset because MYO6 belongs to a fundamentally different myosin class with excessive sequence divergence that distorted phylogenetic reconstruction.
+
+---
+
+# Species and UniProt Accessions
+
+| Species | Gene | UniProt Accession |
+|---|---|---|
+| Homo sapiens | MYH9 | P35579 |
+| Homo sapiens | MYH10 | P35580 |
+| Homo sapiens | MYH14 | Q7Z406 |
+| Mus musculus | MYH9 | Q8VDD5 |
+| Mus musculus | MYH10 | Q61879 |
+| Mus musculus | MYH14 | Q6URW6 |
+| Danio rerio | myh9a | A0A8M1NEM1 |
+| Danio rerio | myh10 | I3ISA3 |
+| Gallus gallus | MYH9 | P14105 |
+| Gallus gallus | MYH10 | Q789A4 |
+| Drosophila melanogaster | zip | Q99323 |
+| Caenorhabditis elegans | nmy-2 | Q22869 |
+| Dictyostelium discoideum | mhcA | P08799 |
+
+---
+
+# Methodology
+
+## 1. Multiple Sequence Alignment
+
+Protein sequences were aligned using **MAFFT v7.505**.
+
+### Command
+
+```bash
+mafft --auto all_nmii_motor.fasta > aligned_nmii.fasta
+```
+
+### Alignment Features
+
+- Automatic strategy selection
+- BLOSUM62 substitution matrix
+- Iterative refinement
+- Local pairwise alignment information
+- UPGMA guide tree generation
+- L-INS-i alignment strategy selected automatically
+
+---
+
+## 2. Alignment Trimming
+
+Poorly aligned and gap-rich regions were removed using **ClipKIT**.
+
+### Command
+
+```bash
+clipkit aligned_nmii.fasta -m smart-gap -o trimmed_nmii.fasta
+```
+
+### Trimming Results
+
+- Original alignment length: 772
+- Retained positions: 717
+- Trimmed positions: 55
+- Percentage trimmed: 7.124%
+
+---
+
+## 3. Phylogenetic Reconstruction
+
+Maximum-likelihood phylogenetic analysis was performed using **IQ-TREE2**.
+
+### Command
+
+```bash
+iqtree2 -s trimmed_nmii.fasta -m MFP -bb 1000 -alrt 1000
+```
+
+### Analysis Features
+
+- Automatic model selection using ModelFinder Plus
+- Ultrafast bootstrap analysis (1000 replicates)
+- SH-aLRT branch support analysis (1000 replicates)
+- Maximum-likelihood optimization
+- Branch length optimization
+- Nearest-neighbor interchange optimization
+
+---
+
+# Major Findings
+
+- MYH9, MYH10, and MYH14 formed distinct vertebrate paralog clades
+- Vertebrate NM2 proteins clustered separately from invertebrate homologs
+- Zebrafish and chicken homologs grouped closely with mammalian orthologs
+- *Dictyostelium* mhcA formed the basal outgroup branch
+- Major vertebrate branches showed strong bootstrap and SH-aLRT support
+
+One particularly interesting observation was that mouse MYH10 and human MYH10 motor domains were nearly identical after trimming, reflecting extremely strong evolutionary conservation of the catalytic motor domain.
+
+---
+
+# Evolutionary Interpretation
+
+The phylogenetic structure strongly supports the hypothesis that vertebrate NM2 paralogs originated through ancestral gene duplication events followed by evolutionary divergence.
+
+As multicellular organisms evolved increasing developmental and cellular complexity, expansion of NM2 paralogs likely enabled:
+
+- Tissue-specific specialization
+- Functional redundancy
+- Distinct regulatory mechanisms
+- More precise cytoskeletal control
+- Increased adaptability of cellular mechanics
+
+Despite diversification, the remarkable conservation of the ATPase motor domain across distant taxa demonstrates strong purifying selection acting on core motor function throughout eukaryotic evolution.
+
+---
+
+# Tree Visualization
+
+Phylogenetic trees were visualized using **iTOL (Interactive Tree Of Life)**.
+
+Two separate visualizations were generated:
+
+- Bootstrap support tree
+- SH-aLRT support tree
+
+Minimal black-and-white formatting was intentionally used to maintain clarity and emphasize evolutionary topology rather than graphical styling.
 
 ---
 
 # Repository Structure
 
 ```text
-NM2_Evolution/
-│
-├── raw_data/
-│   └── all_nmii.fasta
-│
-├── alignment/
-│   ├── aligned_nmii.fasta
-│   └── trimmed_nmii.fasta
-│
-├── trees/
-│   ├── nmii_tree.treefile
-│   ├── nmii_tree.contree
-│   ├── nmii_tree.iqtree
-│   ├── nmii_tree.log
-│   ├── nmii_tree.splits.nex
-│   └── nmii_phylogenetic_tree.svg
-│
-├── results/
-│   └── workflow screenshots
-│
-├── workflow_commands.md
-│
-└── README.md
+alignment/
+├── aligned_nmii.fasta
+├── trimmed_nmii.fasta
+
+raw_data/
+├── all_nmii_motor.fasta
+
+trees/
+├── Bootstrap.svg
+├── SH-aLRT.svg
+├── trimmed_nmii.fasta.treefile
+├── trimmed_nmii.fasta.contree
+├── trimmed_nmii.fasta.iqtree
+├── trimmed_nmii.fasta.log
+├── trimmed_nmii.fasta.mldist
+├── trimmed_nmii.fasta.splits.nex
 ```
 
 ---
 
-# Dataset Curation
-
-Protein sequences were retrieved from the UniProt database in FASTA format.
-
-Only curated non-muscle myosin II homologs were selected. Muscle-specific myosins and incomplete sequences were excluded to maintain dataset consistency.
-
-The dataset included:
-
-| Species | Gene | UniProt ID |
-|---|---|---|
-| *Homo sapiens* | MYH9 | P35579 |
-| *Homo sapiens* | MYH10 | P35580 |
-| *Homo sapiens* | MYH14 | Q7Z406 |
-| *Mus musculus* | MYH9 | Q8VDD5 |
-| *Mus musculus* | MYH10 | Q61879 |
-| *Mus musculus* | MYH14 | Q6URW6 |
-| *Danio rerio* | myh9a | A0A8M2BCY6 |
-| *Danio rerio* | myh10 | I3ISA3 |
-| *Gallus gallus* | MYH9 | P14105 |
-| *Gallus gallus* | MYH10 | Q789A4 |
-| *Drosophila melanogaster* | zip | Q99323 |
-| *Caenorhabditis elegans* | nmy-2 | Q22869 |
-| *Dictyostelium discoideum* | mhcA | P08799 |
-
----
-
-# Workflow Summary
-
-## 1. Multiple Sequence Alignment
-
-Tool used: MAFFT
-
-```bash
-mafft --auto raw_data/all_nmii.fasta > alignment/aligned_nmii.fasta
-```
-
-### Important Parameters
-
-- `--auto` enabled automatic alignment strategy selection
-- Amino acid mode automatically detected
-- BLOSUM62 substitution matrix used
-- Iterative refinement alignment performed
-
-### Output
-
-`aligned_nmii.fasta`
-
----
-
-## 2. Alignment Trimming
-
-Tool used: ClipKIT
-
-```bash
-~/.local/bin/clipkit alignment/aligned_nmii.fasta -o alignment/trimmed_nmii.fasta
-```
-
-### Important Parameters
-
-- smart-gap trimming mode
-- Gap threshold: 0.9231
-
-### Results
-
-- Original alignment length: 2321
-- Sites retained: 2031
-- Sites trimmed: 290
-- Percentage trimmed: 12.495%
-
-### Output
-
-`trimmed_nmii.fasta`
-
----
-
-## 3. Phylogenetic Tree Construction
-
-Tool used: IQ-TREE2
-
-```bash
-iqtree2 -s alignment/trimmed_nmii.fasta -m MFP -B 1000 --alrt 1000 -T AUTO --prefix trees/nmii_tree --redo
-```
-
-### Important Parameters
-
-- `-m MFP` → automatic model selection using ModelFinder Plus
-- `-B 1000` → ultrafast bootstrap analysis with 1000 replicates
-- `--alrt 1000` → SH-aLRT branch support with 1000 replicates
-- `-T AUTO` → automatic CPU thread detection
-
-### Best-fit Evolutionary Model
-
-`Q.insect+F+R3`
-
-### Output Files
-
-- `nmii_tree.treefile`
-- `nmii_tree.contree`
-- `nmii_tree.iqtree`
-- `nmii_tree.log`
-
----
-
-# Tree Visualization
-
-The phylogenetic tree was visualized using iTOL (Interactive Tree Of Life).
-
-Output:
-`nmii_phylogenetic_tree.svg`
-
----
-
-# Biological Interpretation
-
-The phylogenetic analysis revealed clear clustering of homologous NMII proteins according to evolutionary lineage.
-
-## Key Observations
-
-### 1. Vertebrate Paralogs Clustered Together
-
-Human, mouse, chicken, and zebrafish MYH9, MYH10, and MYH14 proteins formed closely related clusters, suggesting strong evolutionary conservation among vertebrate NMII paralogs.
-
-Non-muscle myosin II in vertebrates is mainly represented by three paralogs:
-
-- MYH9 (NMII-A)
-- MYH10 (NMII-B)
-- MYH14 (NMII-C)
-
-The clustering pattern observed in the phylogenetic tree suggests that these paralogs originated through ancestral gene duplication events.
-
----
-
-### 2. Evidence for Gene Duplication Events
-
-Invertebrates typically possess only one ancestral non-muscle myosin II gene, whereas vertebrates contain multiple specialized paralogs.
-
-The phylogenetic tree supports the hypothesis that an ancestral NMII gene underwent duplication during vertebrate evolution, leading to the emergence of:
-
-- MYH9
-- MYH10
-- MYH14
-
-Following duplication, these paralogs diverged independently and acquired specialized cellular functions while still retaining conserved motor domains.
-
-This evolutionary expansion likely occurred as multicellular organisms became more complex and required more specialized regulation of:
-
-- Cell migration
-- Cytokinesis
-- Tissue organization
-- Intracellular force generation
-
-Thus, the observed branching pattern reflects both:
-- evolutionary conservation of core cytoskeletal mechanisms
-- functional diversification after duplication
-
----
-
-### 3. Mammalian Sequences Showed Highest Similarity
-
-Human and mouse homologs clustered very closely together, reflecting their recent common ancestry and high sequence conservation.
-
----
-
-### 4. Invertebrate Homologs Were More Divergent
-
-*Drosophila melanogaster* and *Caenorhabditis elegans* NMII proteins branched separately from vertebrate clusters, indicating greater evolutionary divergence.
-
-These organisms likely retain sequences more similar to the ancestral non-muscle myosin II form before vertebrate duplication events occurred.
-
----
-
-### 5. Dictyostelium Represented an Early-Diverging Lineage
-
-The *Dictyostelium discoideum* sequence occupied a distant branch in the tree, consistent with its position as an early-diverging eukaryote.
-
-This supports the idea that non-muscle myosin II proteins originated early during eukaryotic evolution and were later diversified through lineage-specific adaptations and duplication events.
+# Tools Used
+
+- MAFFT v7.505
+- ClipKIT
+- IQ-TREE2 v2.3.6
+- iTOL
+- UniProt Database
 
 ---
 
 # Conclusion
 
-This analysis demonstrated that non-muscle myosin II proteins are highly conserved across eukaryotes while also showing lineage-specific diversification.
+This analysis demonstrates how gene duplication and evolutionary divergence contributed to the expansion of the non-muscle myosin II family in vertebrates.
 
-The phylogenetic relationships observed in the tree support:
+The resulting paralogs retain highly conserved motor functionality while supporting increasingly specialized cellular roles in complex multicellular organisms.
 
-- evolutionary conservation of cytoskeletal motor proteins
-- duplication-driven expansion of vertebrate NMII paralogs
-- divergence of NMII homologs across major eukaryotic lineages
-- increasing specialization of NMII proteins during evolution of complex multicellular organisms
+The study highlights the balance between evolutionary conservation and functional diversification that shapes essential cytoskeletal protein families across eukaryotic evolution.
 
-The workflow successfully generated a reproducible phylogenetic pipeline including dataset curation, alignment, trimming, tree construction, and evolutionary interpretation.
+---
